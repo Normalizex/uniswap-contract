@@ -7,10 +7,10 @@ export class UniswapV2RouterWrite {
 	/**
 	 * @param tokenA - address
 	 * @param tokenB - address
-	 * @param amountADesired - unit
-	 * @param amountBDesired - unit
-	 * @param amountAMin - unit
-	 * @param amountBMin - unit
+	 * @param amountADesired - unit (ether)
+	 * @param amountBDesired - unit (ether)
+	 * @param amountAMin - unit (ether)
+	 * @param amountBMin - unit (ether)
 	 * @param to - address 
 	 * @param deadline - time (seconds)
 	 * @returns transaction data
@@ -37,9 +37,9 @@ export class UniswapV2RouterWrite {
 
 	/**
 	 * @param token - address
-	 * @param amountTokenDesired - unit
-	 * @param amountTokenMin - unit
-	 * @param amountETHMin - unit
+	 * @param amountTokenDesired - unit (ether)
+	 * @param amountTokenMin - unit (ether)
+	 * @param amountETHMin - unit (ether)
 	 * @param to - address 
 	 * @param deadline - time (seconds)
 	 * @returns transaction data
@@ -63,9 +63,9 @@ export class UniswapV2RouterWrite {
 	/**
 	 * @param tokenA - address
 	 * @param tokenB - address
-	 * @param liquidity - unit
-	 * @param amountAMin - unit
-	 * @param amountBMin - unit
+	 * @param liquidity - unit (ether)
+	 * @param amountAMin - unit (ether)
+	 * @param amountBMin - unit (ether)
 	 * @param to - address
 	 * @param deadline - time (seconds)
 	 * @returns transaction data
@@ -90,9 +90,9 @@ export class UniswapV2RouterWrite {
 
 	/**
 	 * @param token - address
-	 * @param liquidity - unit
-	 * @param amountTokenMin - unit
-	 * @param amountETHMin - unit
+	 * @param liquidity - unit (ether)
+	 * @param amountTokenMin - unit (ether)
+	 * @param amountETHMin - unit (ether)
 	 * @param to - address
 	 * @param deadline - time (seconds)
 	 * @returns transaction data
@@ -115,9 +115,9 @@ export class UniswapV2RouterWrite {
 
 	/**
 	 * @param token - address
-	 * @param liquidity - unit
-	 * @param amountTokenMin - unit
-	 * @param amountETHMin - unit
+	 * @param liquidity - unit (ether)
+	 * @param amountTokenMin - unit (ether)
+	 * @param amountETHMin - unit (ether)
 	 * @param to - address
 	 * @param deadline - time (seconds)
 	 * @returns transaction data
@@ -140,9 +140,9 @@ export class UniswapV2RouterWrite {
 
 	/**
 	 * @param token - address
-	 * @param liquidity - unit
-	 * @param amountTokenMin - unit
-	 * @param amountETHMin - unit
+	 * @param liquidity - unit (ether)
+	 * @param amountTokenMin - unit (ether)
+	 * @param amountETHMin - unit (ether)
 	 * @param to - address
 	 * @param deadline - time (seconds)
 	 * @param approveMax - bool
@@ -177,9 +177,9 @@ export class UniswapV2RouterWrite {
 
 	/**
 	 * @param token - address
-	 * @param liquidity - unit
-	 * @param amountTokenMin - unit
-	 * @param amountETHMin - unit
+	 * @param liquidity - unit (ether)
+	 * @param amountTokenMin - unit (ether)
+	 * @param amountETHMin - unit (ether)
 	 * @param to - address
 	 * @param deadline - time (seconds)
 	 * @param approveMax - bool
@@ -215,9 +215,9 @@ export class UniswapV2RouterWrite {
 	/**
 	 * @param tokenA - address
 	 * @param tokenB - address
-	 * @param liquidity - unit
-	 * @param amountAMin - unit
-	 * @param amountBMin - unit
+	 * @param liquidity - unit (ether)
+	 * @param amountAMin - unit (ether)
+	 * @param amountBMin - unit (ether)
 	 * @param to - address
 	 * @param deadline - time (seconds)
 	 * @param approveMax - bool
@@ -251,15 +251,116 @@ export class UniswapV2RouterWrite {
 		r.toString(),
 		s.toString()
 	).encodeABI() as string;
-	
+
 	/**
-	 * @param amountIn - unit
-	 * @param amountOutMin - unit
+	 * @param amountOut - unit (ether)
 	 * @param path - address[]
 	 * @param to - address
 	 * @param deadline - time (seconds)
 	 * @returns transaction data
-	 */
+	*/
+	swapETHForExactTokens = (
+		amountOut: string | number,
+		path: string[],
+		to: string,
+		deadline: number
+	) => this._contract.methods.swapETHForExactTokens(
+		amountOut.toString(),
+		[...path.map(address => Web3.utils.toChecksumAddress(address))],
+		Web3.utils.toChecksumAddress(to),
+		deadline
+	).encodeABI() as string;;
+
+	/**
+	 * @param amountOutMin - unit (ether)
+	 * @param path - address[]
+	 * @param to - address
+	 * @param deadline - time (seconds)
+	 * @returns transaction data
+	*/
+	swapExactETHForTokens = (
+		amountOutMin : string | number,
+		path: string[],
+		to: string,
+		deadline: number
+	) => this._contract.methods.swapExactETHForTokens(
+		amountOutMin.toString(),
+		[...path.map(address => Web3.utils.toChecksumAddress(address))],
+		Web3.utils.toChecksumAddress(to),
+		deadline
+	).encodeABI() as string;;
+	
+	/**
+	 * @param amountOutMin - unit (ether)
+	 * @param path - address[]
+	 * @param to - address
+	 * @param deadline - time (seconds)
+	 * @returns transaction data
+	*/
+	swapExactETHForTokensSupportingFeeOnTransferTokens = (
+		amountOutMin: string | number,
+		path: string[],
+		to: string,
+		deadline: number
+	) => this._contract.methods.swapExactETHForTokensSupportingFeeOnTransferTokens(
+		amountOutMin.toString(),
+		[...path.map(address => Web3.utils.toChecksumAddress(address))],
+		Web3.utils.toChecksumAddress(to),
+		deadline
+	);
+
+	/**
+	 * @param amountIn - unit (ether)
+	 * @param amountOutMin - unit (ether)
+	 * @param path - address[]
+	 * @param to - address
+	 * @param deadline - time (seconds)
+	 * @returns transaction data
+	*/
+	swapExactTokensForETH = (
+		amountIn: string | number,
+		amountOutMin: string | number,
+		path: string[],
+		to: string,
+		deadline: number,
+	) => this._contract.methods.swapExactTokensForETH(
+		amountIn.toString(),
+		amountOutMin.toString(),
+		[...path.map(address => Web3.utils.toChecksumAddress(address))],
+		Web3.utils.toChecksumAddress(to),
+		deadline
+	).encodeABI() as string;
+	
+	/**
+	 * @param amountIn - unit (ether)
+	 * @param amountOutMin - unit (ether)
+	 * @param path - address[]
+	 * @param to - address
+	 * @param deadline - time (seconds)
+	 * @returns transaction data
+	*/
+	swapExactTokensForETHSupportingFeeOnTransferTokens = (
+		amountIn: string | number,
+		amountOutMin: string | number,
+		path: string[],
+		to: string,
+		deadline: number,
+	) => this._contract.methods.swapExactTokensForETHSupportingFeeOnTransferTokens(
+		amountIn.toString(),
+		amountOutMin.toString(),
+		[...path.map(address => Web3.utils.toChecksumAddress(address))],
+		Web3.utils.toChecksumAddress(to),
+		deadline
+	).encodeABI() as string;
+
+	/**
+	 * @param amountIn - unit (ether)
+	 * @param amountOutMin - unit (ether)
+	 * @param path - address[]
+	 * @param to - address
+	 * @param deadline - time (seconds)
+	 * @returns transaction data
+	*/
 	swapExactTokensForTokens = (
 		amountIn: string | number,
 		amountOutMin: string | number,
@@ -274,7 +375,71 @@ export class UniswapV2RouterWrite {
 		deadline
 	).encodeABI() as string;
 
+	/**
+	 * @param amountIn - unit (ether)
+	 * @param amountOutMin - unit (ether)
+	 * @param path - address[]
+	 * @param to - address
+	 * @param deadline - time (seconds)
+	 * @returns transaction data
+	*/
+	swapExactTokensForTokensSupportingFeeOnTransferTokens = (
+		amountIn: string | number,
+		amountOutMin: string | number,
+		path: string[],
+		to: string,
+		deadline: number
+	) => this._contract.methods.swapExactTokensForTokensSupportingFeeOnTransferTokens(
+		amountIn.toString(),
+		amountOutMin.toString(),
+		[...path.map(address => Web3.utils.toChecksumAddress(address))],
+		Web3.utils.toChecksumAddress(to),
+		deadline
+	).encodeABI() as string;
 
+	/**
+	 * @param amountOut - unit (ether)
+	 * @param amountInMax - unit (ether)
+	 * @param path - address[]
+	 * @param to - address
+	 * @param deadline - time (seconds)
+	 * @returns transaction data
+	*/
+	swapTokensForExactETH = (
+		amountOut: string | number,
+		amountInMax: string | number,
+		path: string[],
+		to: string,
+		deadline: number
+	) => this._contract.methods.swapTokensForExactETH(
+		amountOut.toString(),
+		amountInMax.toString(),
+		[...path.map(address => Web3.utils.toChecksumAddress(address))],
+		Web3.utils.toChecksumAddress(to),
+		deadline
+	).encodeABI() as string;
+	
+	/**
+	 * @param amountOut - unit (ether)
+	 * @param amountInMax - unit (ether)
+	 * @param path - address[]
+	 * @param to - address
+	 * @param deadline - time (seconds)
+	 * @returns transaction data
+	*/
+	swapTokensForExactTokens = (
+		amountOut: string | number,
+		amountInMax: string | number,
+		path: string[],
+		to: string,
+		deadline: number
+	) => this._contract.methods.swapTokensForExactTokens(
+		amountOut.toString(),
+		amountInMax.toString(),
+		[...path.map(address => Web3.utils.toChecksumAddress(address))],
+		Web3.utils.toChecksumAddress(to),
+		deadline
+	).encodeABI() as string;
 
 	constructor(contract: Contract) {
 		this._contract = contract;
