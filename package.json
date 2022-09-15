@@ -1,6 +1,6 @@
 {
   "name": "@normalizex/uniswap-contract",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "library for web3 methods of uniswap contract",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

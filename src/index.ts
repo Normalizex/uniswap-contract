@@ -12,9 +12,8 @@ export class UniswapV2Router {
 	public write;
 	public address;
 
-
-	constructor(routerAddress: string, provider?: string) {
-		this._web3 = new Web3(provider || '');
+	constructor(routerAddress: string, provider: string | Web3) {
+		this._web3 = typeof provider === 'string' ? new Web3(provider) : provider;
 		this.address = Web3.utils.toChecksumAddress(routerAddress);
 		this._contract = new this._web3.eth.Contract(UniswapRouterV2Abi, this.address);
 		
