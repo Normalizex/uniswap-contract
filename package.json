@@ -1,6 +1,6 @@
 {
   "name": "@normalizex/uniswap-contract",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "library for web3 methods of uniswap contract",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -16,10 +16,10 @@
   },
   "homepage": "https://github.com/Normalizex/uniswap-contract#readme",
   "author": "Normalizex",
-  "license": "Apache-2.0",
+  "license": "MIT",
   "private": false,
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && webpack",
     "prepublish": "npm run build"
   },
   "keywords": [
@@ -32,8 +32,21 @@
     "ethereum"
   ],
   "devDependencies": {
-    "@types/node": "^17.0.31",
-    "typescript": "^4.6.4"
+    "@types/node": "17.0.31",
+    "assert": "2.0.0",
+    "crypto-browserify": "3.12.0",
+    "fork-ts-checker-webpack-plugin": "7.2.13",
+    "https-browserify": "1.0.0",
+    "os-browserify": "0.3.0",
+    "process": "0.11.10",
+    "stream-browserify": "3.0.0",
+    "stream-http": "3.2.0",
+    "terser-webpack-plugin": "5.3.6",
+    "ts-loader": "9.3.1",
+    "typescript": "4.6.4",
+    "url": "0.11.0",
+    "webpack": "5.74.0",
+    "webpack-cli": "4.10.0"
   },
   "dependencies": {
     "web3": "1.7.3"

@@ -10,8 +10,18 @@ Using yarn:
 ```console
 yarn add @normalizex/uniswap-contract
 ```
+Using jsDelivr CDN:
+```html
+<script src="https://cdn.jsdelivr.net/npm/@normalizex/uniswap-contract/dist/uniswap-contract.min.js"></script>
+```
+Using unpkg CDN:
+```html
+<script src="https://unpkg.com/@normalizex/uniswap-contract/dist/uniswap-contract.min.js"></script>
+```
+
 ***
 # Usage:
+NodeJS:
 ```js
 import { UniswapV2Router } from '@normalizex/uniswap-contract';
 const router = new UniswapV2Router(
@@ -20,6 +30,20 @@ const router = new UniswapV2Router(
 	//network provider for read methods.
 	'https://mainnet.infura.io/v3/{ID}'
 );
+```
+Browser:
+```html
+<script type="text/javascript">
+const router = new UniswapV2Router(
+	//pancakeswap example
+	//uniswap contract address in network. (required)
+	'0x10ed43c718714eb63d5aa57b78b54704e256024e',
+	//network provider for read methods.
+	'https://bsc-dataseed.binance.org/'
+)
+
+console.log(UniswapRouterV2Abi)//Array (24)
+</script>
 ```
 - Support for various contracts that are subject to the `uniswap` contract standard.
 - PancakeSwap example: [Support Other Chains](#support-other-chains)
